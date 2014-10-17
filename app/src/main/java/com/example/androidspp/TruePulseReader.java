@@ -55,11 +55,12 @@ public class TruePulseReader {
 
         output.append("Output stream created \n");
 
-        String message = "$PLTIT,HV\r\n";
+        String message = "$DU,0\r\n";
         try {
             dos.writeChars(message);
+            dos.writeChars("$MM,0\r\n");
+            dos.writeChars("$GO\r\n");
             dos.flush();
-            dos.close();
         } catch (Exception e) {
             output.append("Fatal Error In onResume() output stream write failed: " + e.getMessage() + ".");
             e.printStackTrace();
@@ -76,6 +77,8 @@ public class TruePulseReader {
                 String response = dataInputStream.readLine();
                 output.append("Response: " + response);
                 Thread.sleep(500);
+                dos.writeChars("$GO\r\n");
+                dos.flush();
             }
         } catch (Exception e) {
             output.append("Fatal Error In onResume() input stream read failed: " + e.getMessage() + ".");
