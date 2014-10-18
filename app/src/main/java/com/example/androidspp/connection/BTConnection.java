@@ -17,6 +17,8 @@ public class BTConnection implements IConnection {
     private BluetoothSocket bluetoothSocket = null;
     private DataOutputStream dataOutputStream;
     private DataInputStream dataInputStream;
+    private IRawDataListener listener;
+    private Thread readingDataThread;
 
     public BTConnection(BluetoothDevice bluetoothDevice) {
         this.bluetoothDevice = bluetoothDevice;
@@ -103,12 +105,47 @@ public class BTConnection implements IConnection {
         }
     }
 
+    @Override
+    public void setListener(IRawDataListener listener) {
+        if(dataInputStream != null) {
+            this.listener = listener;
+            readingDataThread = new Thread(new ReadingRunnable(dataInputStream));
+            readingDataThread.start();
+        } else {
+            Timber.e("Can't set listener, no input stream");
+        }
+    }
+
     private boolean checkSocket() {
         if (bluetoothSocket != null) {
             return true;
         } else {
             Timber.e("Can't perform operation. No active socket found.");
             return false;
+        }
+    }
+
+    private class ReadingRunnable implements Runnable {
+        private DataInputStream dataInputStream;
+
+        private ReadingRunnable(DataInputStream dataInputStream) {
+            this.dataInputStream = dataInputStream;
+        }
+
+        @Override
+        public void run() {
+            byte[] buffer = new byte[1024];
+            int bytes = 0;
+            while (true) {
+                try {
+                    bytes = dataInputStream.read(buffer);
+                    listener.onAcceptData(buffer, bytes);
+                } catch (IOException e) {
+                    Timber.e("Data read failed: " + e.getMessage());
+                    e.printStackTrace();
+                    break;
+                }
+            }
         }
     }
 }

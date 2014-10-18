@@ -2,14 +2,14 @@ package com.example.androidspp.activity;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothSocket;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -17,7 +17,6 @@ import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.example.androidspp.AndroidSppApplication;
@@ -25,12 +24,12 @@ import com.example.androidspp.DevicesAdapter;
 import com.example.androidspp.R;
 import com.example.androidspp.connection.BTConnection;
 import com.example.androidspp.connection.IConnection;
-import com.example.androidspp.events.PublishResultEvent;
+import com.example.androidspp.connection.IRawDataListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-import de.greenrobot.event.EventBus;
 import timber.log.Timber;
 
 
@@ -43,7 +42,11 @@ public class MainActivity extends ActionBarActivity {
     private ListView foundDevices;
     private IConnection btConnection;
     private View commandsLayout;
-    private Button getDistanceButton;
+    private Handler handler = new Handler() {
+        public void handleMessage(Message msg) {
+            output.append((String) msg.obj);
+        }
+    };
 
     private List<BluetoothDevice> devices = new ArrayList<BluetoothDevice>();
 
@@ -56,12 +59,12 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         output = (TextView) findViewById(R.id.output);
         commandsLayout = findViewById(R.id.commands);
-        getDistanceButton = (Button) findViewById(R.id.btn_get_distance);
+        Button getDistanceButton = (Button) findViewById(R.id.btn_get_distance);
         getDistanceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btConnection.sendCommand("$GO\n");
-                output.append(btConnection.readString() + "\n");
+                btConnection.sendCommand("$PLTIT,GO\r\n");
+                btConnection.sendCommand("$PLTIT,ST\r\n");
             }
         });
 
@@ -88,22 +91,6 @@ public class MainActivity extends ActionBarActivity {
         if (registered) {
             unregisterReceiver(mReceiver);
         }
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        EventBus.getDefault().register(this);
-    }
-
-    @Override
-    protected void onStop() {
-        EventBus.getDefault().unregister(this);
-        super.onStop();
-    }
-
-    public void onEventMainThread(PublishResultEvent event) {
-        output.append(event.getResult());
     }
 
     private boolean checkBT() {
@@ -216,11 +203,21 @@ public class MainActivity extends ActionBarActivity {
         foundDevices.setVisibility(View.GONE);
         BluetoothDevice device = devices.get(position);
         btConnection = new BTConnection(device);
-        if(btConnection.connect()) {
+        if (btConnection.connect()) {
             commandsLayout.setVisibility(View.VISIBLE);
+            btConnection.setListener(new TestListener());
             output.append("Connected to target device");
         } else {
             output.append("Connect failed. Try again");
+        }
+    }
+
+    private class TestListener implements IRawDataListener {
+
+        @Override
+        public void onAcceptData(byte[] data, int bytes) {
+            String result = new String(Arrays.copyOf(data, bytes));
+            handler.obtainMessage(1, result).sendToTarget();
         }
     }
 }
