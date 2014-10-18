@@ -10,54 +10,75 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="15dp"
         android:gravity="center"
-        android:text="@string/lbl_toggle_bt_state"/>
+        android:text="@string/lbl_toggle_bt_state" />
 
     <ToggleButton
         android:id="@+id/toggleState"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:enabled="false"
-        android:layout_toRightOf="@id/toggleStateLabel"/>
+        android:layout_toRightOf="@id/toggleStateLabel"
+        android:enabled="false" />
 
     <TextView
         android:id="@+id/startSearchingLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
         android:layout_below="@id/toggleState"
-        android:layout_marginTop="15dp"/>
+        android:layout_marginTop="15dp"
+        android:gravity="center_horizontal" />
 
     <ProgressBar
         android:id="@+id/progress"
+        style="@android:style/Widget.ProgressBar.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/toggleState"
         android:layout_alignParentRight="true"
+        android:layout_below="@id/toggleState"
         android:layout_marginTop="15dp"
-        android:visibility="gone"
-        style="@android:style/Widget.ProgressBar.Small"/>
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/startSearching"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:enabled="false"
         android:layout_below="@id/startSearchingLabel"
-        android:text="@string/lbl_scan"/>
+        android:enabled="false"
+        android:text="@string/lbl_scan" />
 
     <ListView
         android:id="@+id/foundDevices"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/startSearching"/>
+        android:layout_below="@id/startSearching" />
+
+    <LinearLayout
+        android:id="@+id/commands"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/startSearching"
+        android:visibility="gone"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_get_distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Get distance" />
+
+        <Button
+            android:id="@+id/btn_clear_output"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Clear output" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/output"
-        android:textSize="18sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
         android:layout_below="@id/foundDevices"
-        android:layout_marginTop="15dp"/>
+        android:layout_marginTop="15dp"
+        android:gravity="center_horizontal"
+        android:textSize="18sp" />
 
 </RelativeLayout>

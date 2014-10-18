@@ -1,4 +1,4 @@
-package com.example.androidspp;
+package com.example.androidspp.activity;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -20,39 +20,61 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.example.androidspp.AndroidSppApplication;
+import com.example.androidspp.DevicesAdapter;
+import com.example.androidspp.R;
+import com.example.androidspp.connection.BTConnection;
+import com.example.androidspp.connection.IConnection;
 import com.example.androidspp.events.PublishResultEvent;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import de.greenrobot.event.EventBus;
+import timber.log.Timber;
 
 
 public class MainActivity extends ActionBarActivity {
     private TextView output;
-    private static final String TAG = MainActivity.class.getSimpleName();
-    private BluetoothDevice device;
-
     private BluetoothAdapter mBluetoothAdapter;
-    private BluetoothSocket btSocket;
 
     private DevicesAdapter adapter;
     private ProgressBar progressBar;
     private ListView foundDevices;
-    private TruePulseReader truePulseReader;
+    private IConnection btConnection;
+    private View commandsLayout;
+    private Button getDistanceButton;
 
     private List<BluetoothDevice> devices = new ArrayList<BluetoothDevice>();
 
     private boolean registered = false;
-    private static final UUID MY_UUID =
-            UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         output = (TextView) findViewById(R.id.output);
+        commandsLayout = findViewById(R.id.commands);
+        getDistanceButton = (Button) findViewById(R.id.btn_get_distance);
+        getDistanceButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btConnection.sendCommand("$GO\n");
+                output.append(btConnection.readString() + "\n");
+            }
+        });
+
+        findViewById(R.id.btn_clear_output).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (output.getEditableText() != null) {
+                    output.getEditableText().clear();
+                }
+            }
+        });
+
+        ((AndroidSppApplication) getApplication()).setDebugOutput(output);
 
         if (checkBT()) {
             initUI();
@@ -170,12 +192,10 @@ public class MainActivity extends ActionBarActivity {
                     progressBar.setVisibility(View.GONE);
                     break;
                 case BluetoothDevice.ACTION_ACL_CONNECTED:
-                    Toast.makeText(MainActivity.this, "Connected", Toast.LENGTH_SHORT).show();
-                    Log.d(TAG, "Connected");
+                    Timber.d("Connected");
                     break;
                 case BluetoothDevice.ACTION_ACL_DISCONNECTED:
-                    Toast.makeText(MainActivity.this, "Disconnected", Toast.LENGTH_SHORT).show();
-                    Log.d(TAG, "Disconnected");
+                    Timber.d("Disconnected");
                     break;
             }
         }
@@ -194,8 +214,13 @@ public class MainActivity extends ActionBarActivity {
         mBluetoothAdapter.cancelDiscovery();
         progressBar.setVisibility(View.GONE);
         foundDevices.setVisibility(View.GONE);
-        device = devices.get(position);
-        truePulseReader = new TruePulseReader(device, output);
-        truePulseReader.sendTestMessage();
+        BluetoothDevice device = devices.get(position);
+        btConnection = new BTConnection(device);
+        if(btConnection.connect()) {
+            commandsLayout.setVisibility(View.VISIBLE);
+            output.append("Connected to target device");
+        } else {
+            output.append("Connect failed. Try again");
+        }
     }
 }
