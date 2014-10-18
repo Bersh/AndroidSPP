@@ -20,9 +20,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.example.androidspp.events.PublishResultEvent;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import de.greenrobot.event.EventBus;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -62,6 +66,22 @@ public class MainActivity extends ActionBarActivity {
         if (registered) {
             unregisterReceiver(mReceiver);
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
+    }
+
+    public void onEventMainThread(PublishResultEvent event) {
+        output.append(event.getResult());
     }
 
     private boolean checkBT() {
