@@ -147,7 +147,7 @@ public class BTConnection implements IConnection {
                     bytes = dataInputStream.read(buffer);
                     listener.onAcceptData(buffer, bytes);
                 } catch (IOException e) {
-                    Timber.e("Data read failed: " + e.getMessage());
+//                    Timber.e("Data read failed: " + e.getMessage()); todo need to run in UI thread
                     e.printStackTrace();
                     break;
                 }
