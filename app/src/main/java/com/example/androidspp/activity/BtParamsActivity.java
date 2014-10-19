@@ -44,7 +44,7 @@ public class BtParamsActivity extends ActionBarActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_bt_params);
         rangeFinderType = (Spinner) findViewById(R.id.rangefinder_type);
         ArrayList<String> rangefinderTypes = new ArrayList<String>();
         rangefinderTypes.add("TruePulse");

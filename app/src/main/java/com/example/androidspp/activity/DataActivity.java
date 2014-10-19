@@ -57,7 +57,7 @@ public class DataActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 if(connection != null) {
-                    connection.sendCommand("$MM,6");
+                    connection.sendCommand("$PLTIT,RQ,MM,6\r\n");
                 }
             }
         });
@@ -66,7 +66,7 @@ public class DataActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 if(connection != null) {
-                    connection.sendCommand("$MM,0\r\n");
+                    connection.sendCommand("$PLTIT,RQ,MM,0\r\n");
                 }
             }
         });
@@ -75,8 +75,8 @@ public class DataActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 if(connection != null) {
-                    connection.sendCommand("$GO\r\n");
-                    connection.sendCommand("$ST\r\n");
+                    connection.sendCommand("$PLTIT,RQ,GO\r\n");
+                    connection.sendCommand("$PLTIT,RQ,ST\r\n");
                 }
             }
         });
@@ -122,9 +122,9 @@ public class DataActivity extends ActionBarActivity {
                 if (isConnected) {
                     clearOutput();
                     connection.setListener(new TestListener());
-                    output.append("Connected to target device");
+                    output.append("Connected to target device\n");
                 } else {
-                    output.append("Connect failed. Try again");
+                    output.append("Connect failed. Try again\n");
                 }
             }
         }
