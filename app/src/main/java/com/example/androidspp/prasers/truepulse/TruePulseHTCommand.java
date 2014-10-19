@@ -1,15 +1,15 @@
-package com.example.androidspp.prasers.truepulse;
+package com.example.androidspp.parsers.truepulse;
 
 import java.io.UnsupportedEncodingException;
 
-public class TruePulseHTCommand extends TruePulseHVCommand{
+public class TruePulseHTCommand extends TruePulseHVCommand {
 
-	public TruePulseHTCommand(byte[][] data) throws UnsupportedEncodingException {
-		super(data);	
-	}
-	
-	public double getHeight(){
-		return horizontalDistance;
-	}
+    public TruePulseHTCommand(byte[][] data) throws UnsupportedEncodingException {
+        super(data);
+    }
+
+    public double getHeight() {
+        return horizontalDistance;
+    }
 
 }

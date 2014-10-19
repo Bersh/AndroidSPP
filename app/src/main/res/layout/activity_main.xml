@@ -1,93 +1,143 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="15dp">
-
-    <TextView
-        android:id="@+id/toggleStateLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="15dp"
-        android:gravity="center"
-        android:text="@string/lbl_toggle_bt_state" />
-
-    <ToggleButton
-        android:id="@+id/toggleState"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/toggleStateLabel"
-        android:enabled="false" />
-
-    <TextView
-        android:id="@+id/txt_mode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:text="Mode: HV"
-        android:layout_alignParentEnd="true"/>
-
-
-    <TextView
-        android:id="@+id/startSearchingLabel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/toggleState"
-        android:layout_marginTop="15dp"
-        android:gravity="center_horizontal" />
-
-    <ProgressBar
-        android:id="@+id/progress"
-        style="@android:style/Widget.ProgressBar.Small"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/toggleState"
-        android:layout_marginTop="15dp"
-        android:visibility="gone" />
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.androidspp.MainActivity$PlaceholderFragment" >
 
     <Button
-        android:id="@+id/startSearching"
-        android:layout_width="match_parent"
+        android:id="@+id/buttonSetupBT"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/startSearchingLabel"
-        android:enabled="false"
-        android:text="@string/lbl_scan" />
+        android:onClick="ShowBTSettings"
+        android:text="Настройка BT" />
 
-    <ListView
-        android:id="@+id/foundDevices"
-        android:layout_width="match_parent"
+     <Button
+         android:id="@+id/buttonSetupR"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:onClick="ShowRgSettings"
+         android:text="Настройка дальномера" />
+
+    <CheckBox
+        android:id="@+id/checkBoxAcceptingData"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/startSearching" />
+        android:onClick="AcceptingData"
+        android:text="Прием данных" />
 
     <LinearLayout
-        android:id="@+id/commands"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/startSearching"
-        android:visibility="gone"
-        android:orientation="horizontal">
+        android:orientation="horizontal" >
 
-        <Button
-            android:id="@+id/btn_get_distance"
+        <TextView
+            android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Get distance" />
+            android:text="Расстояние" />
 
-        <Button
-            android:id="@+id/btn_clear_output"
+        <TextView
+            android:id="@+id/textDistance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Clear output" />
+            android:text="" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Азимут" />
+
+        <TextView
+            android:id="@+id/textAzimuth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/textInclination"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+    </LinearLayout>
+    
+     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Расстояние между точками" />
+
+        <TextView
+            android:id="@+id/textDistance2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Азимут между точками" />
+
+        <TextView
+            android:id="@+id/textAzimuth2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Время" />
+
+        <TextView
+            android:id="@+id/textTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="" />
+
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/output"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/commands"
-        android:layout_marginTop="15dp"
-        android:gravity="center_horizontal"
-        android:textSize="18sp" />
-
-</RelativeLayout>
+</LinearLayout>
