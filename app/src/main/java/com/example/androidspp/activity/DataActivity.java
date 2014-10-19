@@ -32,8 +32,9 @@ public class DataActivity extends ActionBarActivity {
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             String result = (String) msg.obj;
-            if (result.length() > 10) {
-                String mode = result.substring(7, 9);
+            String[] splitted = result.split(",");
+            if(splitted.length > 1) {
+                String mode = splitted[1];
                 txtMode.setText("Mode : " + mode);
             }
             output.append(result);
@@ -56,7 +57,7 @@ public class DataActivity extends ActionBarActivity {
         btnSetModeML.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(connection != null) {
+                if (connection != null) {
                     connection.sendCommand("$PLTIT,RQ,MM,6\r\n");
                 }
             }
@@ -65,8 +66,8 @@ public class DataActivity extends ActionBarActivity {
         btnSetModeHV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(connection != null) {
-                    connection.sendCommand("$PLTIT,RQ,MM,0\r\n");
+                if (connection != null) {
+                    connection.sendCommand("$PLTIT,MM,0\r\n");
                 }
             }
         });
@@ -74,7 +75,7 @@ public class DataActivity extends ActionBarActivity {
         btnGetDistance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(connection != null) {
+                if (connection != null) {
                     connection.sendCommand("$PLTIT,RQ,GO\r\n");
                     connection.sendCommand("$PLTIT,RQ,ST\r\n");
                 }

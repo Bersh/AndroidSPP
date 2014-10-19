@@ -42,9 +42,15 @@ public class BTConnection implements IConnection {
     @Override
     public boolean disconnect() {
         try {
-            dataInputStream.close();
-            dataOutputStream.close();
-            bluetoothSocket.close();
+            if (dataInputStream != null) {
+                dataInputStream.close();
+            }
+            if (dataOutputStream != null) {
+                dataOutputStream.close();
+            }
+            if (bluetoothSocket != null) {
+                bluetoothSocket.close();
+            }
         } catch (IOException e) {
             Timber.e("Fatal Error in disconnect() socket close failed: " + e.getMessage() + ".");
             e.printStackTrace();
