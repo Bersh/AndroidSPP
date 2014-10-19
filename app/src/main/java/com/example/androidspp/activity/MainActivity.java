@@ -12,10 +12,12 @@ import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -43,6 +45,7 @@ public class MainActivity extends ActionBarActivity {
     private IConnection btConnection;
     private View commandsLayout;
     private TextView txtMode;
+    private Spinner rangeFinderType;
 
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
@@ -65,7 +68,15 @@ public class MainActivity extends ActionBarActivity {
         output = (TextView) findViewById(R.id.output);
         commandsLayout = findViewById(R.id.commands);
         txtMode = (TextView) findViewById(R.id.txt_mode);
+        rangeFinderType = (Spinner) findViewById(R.id.rangefinder_type);
+        ArrayList<String> rangefinderTypes = new ArrayList<String>();
+        rangefinderTypes.add("TruePulse");
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, rangefinderTypes);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Button getDistanceButton = (Button) findViewById(R.id.btn_get_distance);
+        rangeFinderType.setAdapter(dataAdapter);
+        
         getDistanceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
