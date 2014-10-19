@@ -144,7 +144,14 @@ public class BTConnection implements IConnection {
             int bytes = 0;
             while (true) {
                 try {
-                    bytes = dataInputStream.read(buffer);
+                    byte[] tmpBuffer = new byte[1024];
+                    int tmpBytes = dataInputStream.read(tmpBuffer);
+                    System.arraycopy(tmpBuffer, 0, buffer, bytes, tmpBytes);
+                    bytes += tmpBytes;
+                    byte lastByte = buffer[buffer.length - 1];
+                    if(((char)lastByte) != '\n') {
+                        continue;
+                    }
                     listener.onAcceptData(buffer, bytes);
                 } catch (IOException e) {
 //                    Timber.e("Data read failed: " + e.getMessage()); todo need to run in UI thread
