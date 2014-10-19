@@ -1,5 +1,7 @@
-package com.example.androidspp;
+package com.example.androidspp.command;
 
+
+import com.example.androidspp.BaseCommand;
 
 public class TwoPointCommand extends BaseCommand implements ITwoPointCommand {
 
@@ -10,7 +12,7 @@ public class TwoPointCommand extends BaseCommand implements ITwoPointCommand {
     protected double azimuth;
 
     /* (non-Javadoc)
-    * @see com.example.androidspp.ITwoPointCommand#getFirstPoint()
+    * @see com.example.androidspp.command.ITwoPointCommand#getFirstPoint()
     */
     @Override
     public IOnePointCommand getFirstPoint() {
@@ -18,7 +20,7 @@ public class TwoPointCommand extends BaseCommand implements ITwoPointCommand {
     }
 
     /* (non-Javadoc)
-    * @see com.example.androidspp.ITwoPointCommand#getSecondPoint()
+    * @see com.example.androidspp.command.ITwoPointCommand#getSecondPoint()
     */
     @Override
     public IOnePointCommand getSecondPoint() {
@@ -26,7 +28,7 @@ public class TwoPointCommand extends BaseCommand implements ITwoPointCommand {
     }
 
     /* (non-Javadoc)
-    * @see com.example.androidspp.ITwoPointCommand#getAzimuth()
+    * @see com.example.androidspp.command.ITwoPointCommand#getAzimuth()
     */
     @Override
     public double getAzimuth() {
@@ -34,7 +36,7 @@ public class TwoPointCommand extends BaseCommand implements ITwoPointCommand {
     }
 
     /* (non-Javadoc)
-    * @see com.example.androidspp.ITwoPointCommand#getTime()
+    * @see com.example.androidspp.command.ITwoPointCommand#getTime()
     */
     @Override
     public double getTime() {
@@ -42,7 +44,7 @@ public class TwoPointCommand extends BaseCommand implements ITwoPointCommand {
     }
 
     /* (non-Javadoc)
-    * @see com.example.androidspp.ITwoPointCommand#getDistance()
+    * @see com.example.androidspp.command.ITwoPointCommand#getDistance()
     */
     @Override
     public double getDistance() {

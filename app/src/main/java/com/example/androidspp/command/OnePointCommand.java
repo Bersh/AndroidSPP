@@ -1,4 +1,6 @@
-package com.example.androidspp;
+package com.example.androidspp.command;
+
+import com.example.androidspp.BaseCommand;
 
 public class OnePointCommand extends BaseCommand implements IOnePointCommand {
 

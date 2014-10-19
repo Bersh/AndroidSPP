@@ -1,8 +1,8 @@
 package com.example.androidspp.parsers.truepulse;
 
-import com.example.androidspp.ICommandBuilder;
-import com.example.androidspp.IConnection;
 import com.example.androidspp.IDevice;
+import com.example.androidspp.command.ICommandBuilder;
+import com.example.androidspp.connection.IConnection;
 
 public class TruePulseDevice implements IDevice {
 
@@ -21,7 +21,6 @@ public class TruePulseDevice implements IDevice {
     @Override
     public void SetupDevice(IConnection connection) {
         // TODO Auto-generated method stub
-
     }
 
     @Override

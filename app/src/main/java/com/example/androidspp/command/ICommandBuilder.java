@@ -1,4 +1,4 @@
-package com.example.androidspp;
+package com.example.androidspp.command;
 
 public interface ICommandBuilder {
     ICommand BuildCommand(byte[] rawCommands);

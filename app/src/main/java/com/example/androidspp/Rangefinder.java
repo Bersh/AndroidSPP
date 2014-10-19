@@ -1,5 +1,15 @@
 package com.example.androidspp;
 
+import com.example.androidspp.command.ICommand;
+import com.example.androidspp.command.ICommandBuilder;
+import com.example.androidspp.command.IOnePointCommand;
+import com.example.androidspp.command.ITwoPointCommand;
+import com.example.androidspp.command.OnePointCommand;
+import com.example.androidspp.command.RegisterCommand;
+import com.example.androidspp.command.TwoPointCommand;
+import com.example.androidspp.connection.IConnection;
+import com.example.androidspp.connection.IRawDataListener;
+
 import java.util.Date;
 
 
@@ -13,7 +23,7 @@ public class Rangefinder implements IRawDataListener {
     public void setConnection(IConnection connection) {
         this.connection = connection;
         if (connection != null)
-            connection.set_Listener(this);
+            connection.setListener(this);
     }
 
     public IConnection getConnection() {
@@ -38,12 +48,12 @@ public class Rangefinder implements IRawDataListener {
     }
 
     public void Start() {
-        connection.Connect();
+        connection.connect();
         device.SetupDevice(connection);
     }
 
     public void Stop() {
-        connection.Disconnect();
+        connection.disconnect();
     }
 
     public boolean IsReady() {
@@ -51,7 +61,7 @@ public class Rangefinder implements IRawDataListener {
     }
 
     @Override
-    public void OnAcceptData(byte[] data, int bytes) {
+    public void onAcceptData(byte[] data, int bytes) {
         // TODO Auto-generated method stub
         byte[] ndata = new byte[bytes];
         System.arraycopy(data, 0, ndata, 0, bytes);

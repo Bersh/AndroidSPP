@@ -1,4 +1,4 @@
-package com.example.androidspp;
+package com.example.androidspp.command;
 
 public interface ITwoPointCommand extends ICommand {
 

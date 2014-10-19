@@ -1,4 +1,4 @@
-package com.example.androidspp.prasers.truepulse;
+package com.example.androidspp.parsers.truepulse;
 
 public abstract class TwoPointCommand {
 

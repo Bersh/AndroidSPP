@@ -2,7 +2,7 @@ package com.example.androidspp.parsers.truepulse;
 
 import android.text.TextUtils;
 
-import com.example.androidspp.OnePointCommand;
+import com.example.androidspp.command.OnePointCommand;
 
 import java.io.UnsupportedEncodingException;
 

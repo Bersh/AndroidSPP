@@ -1,4 +1,4 @@
-package com.example.androidspp;
+package com.example.androidspp.command;
 
 public class RegisterCommand {
     public IOnePointCommand Command;

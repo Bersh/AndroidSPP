@@ -1,15 +1,14 @@
 package com.example.androidspp.parsers.test;
 
-import com.example.androidspp.ICommandBuilder;
-import com.example.androidspp.IConnection;
 import com.example.androidspp.IDevice;
+import com.example.androidspp.command.ICommandBuilder;
+import com.example.androidspp.connection.IConnection;
 
 public class TestDevice implements IDevice {
 
     @Override
     public ICommandBuilder GetCommandBuilder() {
-        // TODO Auto-generated method stub
-        return new TestCommandBuilder();
+        return new com.example.androidspp.parsers.test.TestCommandBuilder();
     }
 
     @Override

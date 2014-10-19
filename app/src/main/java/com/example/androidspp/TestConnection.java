@@ -1,6 +1,7 @@
 package com.example.androidspp;
 
-//com.example.androidspp
+import com.example.androidspp.connection.IConnection;
+import com.example.androidspp.connection.IRawDataListener;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -15,7 +16,7 @@ public class TestConnection implements IConnection {
     int idx = 0;
 
     @Override
-    public void Connect() {
+    public boolean connect() {
         // TODO Auto-generated method stub
         // this will run when timer elapses
         TimerTask myTimerTask = new TimerTask() {
@@ -24,7 +25,7 @@ public class TestConnection implements IConnection {
             public void run() {
                 if (listener != null) {
                     byte[] data = messageTemplates[idx++ % messageTemplates.length].getBytes();
-                    listener.OnAcceptData(data, data.length);
+                    listener.onAcceptData(data, data.length);
                 }
             }
 
@@ -34,27 +35,42 @@ public class TestConnection implements IConnection {
 
         // schedule timer
         timer.schedule(myTimerTask, 0, delayInMs);
-
+        return true;
     }
 
     @Override
-    public void Disconnect() {
+    public boolean disconnect() {
         // TODO Auto-generated method stub
         if (timer != null)
             timer.cancel();
         timer.purge();
         timer = null;
+        return true;
     }
 
     @Override
-    public void SendCommand(byte[] data) {
+    public void sendCommand(byte[] data) {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void set_Listener(IRawDataListener listener) {
-        // TODO Auto-generated method stub
+    public void sendCommand(String command) {
+
+    }
+
+    @Override
+    public String readString() {
+        return null;
+    }
+
+    @Override
+    public void read(byte[] buffer) {
+
+    }
+
+    @Override
+    public void setListener(IRawDataListener listener) {
         this.listener = listener;
     }
 

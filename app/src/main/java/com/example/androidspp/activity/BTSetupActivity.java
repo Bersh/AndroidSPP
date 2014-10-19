@@ -9,9 +9,9 @@ import android.view.View;
 import android.widget.CheckBox;
 
 import com.example.androidspp.Globals;
-import com.example.androidspp.IConnection;
 import com.example.androidspp.R;
 import com.example.androidspp.TestConnection;
+import com.example.androidspp.connection.IConnection;
 
 public class BTSetupActivity extends ActionBarActivity {
 
@@ -62,9 +62,7 @@ public class BTSetupActivity extends ActionBarActivity {
     public void Accept(View view) {
         if (cbUseTest.isChecked()) {
             Globals.Rangefinder.setConnection(new TestConnection());
-        } else
-
-        {
+        } else {
             Globals.Rangefinder.setConnection(CreateBluetoothConnection());
         }
 
@@ -74,6 +72,5 @@ public class BTSetupActivity extends ActionBarActivity {
     IConnection CreateBluetoothConnection() {
         return null;
     }
-
 
 }

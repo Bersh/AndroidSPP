@@ -1,9 +1,9 @@
 package com.example.androidspp.parsers.test;
 
-import com.example.androidspp.ICommand;
-import com.example.androidspp.ICommandBuilder;
-import com.example.androidspp.OnePointCommand;
-import com.example.androidspp.TwoPointCommand;
+import com.example.androidspp.command.ICommand;
+import com.example.androidspp.command.ICommandBuilder;
+import com.example.androidspp.command.OnePointCommand;
+import com.example.androidspp.command.TwoPointCommand;
 
 public class TestCommandBuilder implements ICommandBuilder {
 
