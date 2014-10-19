@@ -42,9 +42,14 @@ public class MainActivity extends ActionBarActivity {
     private ListView foundDevices;
     private IConnection btConnection;
     private View commandsLayout;
+    private TextView txtMode;
+
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
-            output.append((String) msg.obj);
+            String result = (String) msg.obj;
+            String mode = result.substring(7, 9);
+            txtMode.setText("Mode : " + mode);
+            output.append(result);
         }
     };
 
@@ -59,6 +64,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         output = (TextView) findViewById(R.id.output);
         commandsLayout = findViewById(R.id.commands);
+        txtMode = (TextView) findViewById(R.id.txt_mode);
         Button getDistanceButton = (Button) findViewById(R.id.btn_get_distance);
         getDistanceButton.setOnClickListener(new View.OnClickListener() {
             @Override
