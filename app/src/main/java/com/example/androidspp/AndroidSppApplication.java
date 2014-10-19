@@ -4,6 +4,8 @@ package com.example.androidspp;
 import android.app.Application;
 import android.widget.TextView;
 
+import com.splunk.mint.Mint;
+
 import timber.log.Timber;
 
 public class AndroidSppApplication extends Application {
@@ -13,6 +15,7 @@ public class AndroidSppApplication extends Application {
     public void onCreate() {
         super.onCreate();
         Timber.plant(new LogToTextViewTree());
+        Mint.initAndStartSession(this, "82b0ad83");
     }
 
     public void setDebugOutput(TextView debugOutput) {

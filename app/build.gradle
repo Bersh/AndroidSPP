@@ -1,5 +1,12 @@
 apply plugin: 'com.android.application'
 
+repositories {
+    mavenCentral()
+    maven {
+        url "https://mint.splunk.com/gradle/"
+    }
+}
+
 android {
     compileSdkVersion 20
     buildToolsVersion "20.0.0"
@@ -29,4 +36,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:20.0.0'
     compile 'com.jakewharton.timber:timber:2.4.+'
     compile 'com.google.code.findbugs:jsr305:3.0.0'
+    compile "com.splunk.mint:mint:4.0.3"
 }
