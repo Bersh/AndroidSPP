@@ -20,6 +20,16 @@ public class Rangefinder implements IRawDataListener {
     ICommandBuilder commBuilder;
     RegisterCommand[] commandsBuffer = new RegisterCommand[2];
 
+    public Rangefinder() {
+    }
+
+    public Rangefinder(IConnection connection, IDevice device) {
+        this.connection = connection;
+        this.device = device;
+        connection.setListener(this);
+        commBuilder = device.GetCommandBuilder();
+    }
+
     public void setConnection(IConnection connection) {
         this.connection = connection;
         if (connection != null)
@@ -62,7 +72,6 @@ public class Rangefinder implements IRawDataListener {
 
     @Override
     public void onAcceptData(byte[] data, int bytes) {
-        // TODO Auto-generated method stub
         byte[] ndata = new byte[bytes];
         System.arraycopy(data, 0, ndata, 0, bytes);
         ICommand command = commBuilder.BuildCommand(data);

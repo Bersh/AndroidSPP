@@ -1,4 +1,4 @@
-package com.example.androidspp;
+package com.example.androidspp.connection;
 
 import com.example.androidspp.connection.IConnection;
 import com.example.androidspp.connection.IRawDataListener;

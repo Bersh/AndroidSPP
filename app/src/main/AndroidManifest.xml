@@ -22,14 +22,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.example.androidspp.activity.BTSetupActivity"
-            android:label="@string/title_activity_btsetup" >
-        </activity>
-        <activity
-            android:name="com.example.androidspp.activity.DeviceSetupActivity"
-            android:label="@string/title_activity_device_setup" >
-        </activity>
     </application>
 
 </manifest>

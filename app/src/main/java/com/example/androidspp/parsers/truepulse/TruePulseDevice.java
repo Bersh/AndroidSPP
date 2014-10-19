@@ -25,7 +25,6 @@ public class TruePulseDevice implements IDevice {
 
     @Override
     public String getName() {
-        // TODO Auto-generated method stub
         return "TruePulse";
     }
 
