@@ -1,0 +1,86 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/margin_10dp"
+    tools:context="com.example.androidspp.activity.DataActivity">
+
+    <TextView
+        android:id="@+id/txt_mode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:textSize="25sp" />
+
+    <Button
+        android:id="@+id/btn_connect_device"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_mode"
+        android:layout_centerHorizontal="true"
+        android:text="Connect rangefinder" />
+
+    <TextView
+        android:id="@+id/commands_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_connect_device"
+        android:layout_marginTop="@dimen/margin_15dp"
+        android:text="@string/txt_commands"
+        android:textSize="20sp" />
+
+    <RelativeLayout
+        android:id="@+id/commands"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/commands_label"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:visibility="visible">
+
+        <Button
+            android:id="@+id/btn_get_distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:layout_alignParentLeft="true"
+            android:text="@string/txt_get_distance" />
+
+        <Button
+            android:id="@+id/btn_set_mode_hv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/btn_get_distance"
+            android:enabled="false"
+            android:text="@string/txt_set_mode_hv" />
+
+        <Button
+            android:id="@+id/btn_set_mode_ml"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/btn_set_mode_hv"
+            android:enabled="false"
+            android:text="@string/txt_set_mode_ml" />
+
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_clear_output"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/commands"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:text="@string/txt_clear_output" />
+
+    <TextView
+        android:id="@+id/output"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_clear_output"
+        android:layout_marginTop="15dp"
+        android:gravity="center_horizontal"
+        android:textSize="18sp" />
+
+</RelativeLayout>

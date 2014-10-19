@@ -107,7 +107,7 @@ public class BTConnection implements IConnection {
 
     @Override
     public void setListener(IRawDataListener listener) {
-        if(dataInputStream != null) {
+        if (dataInputStream != null) {
             this.listener = listener;
             readingDataThread = new Thread(new ReadingRunnable(dataInputStream));
             readingDataThread.start();
